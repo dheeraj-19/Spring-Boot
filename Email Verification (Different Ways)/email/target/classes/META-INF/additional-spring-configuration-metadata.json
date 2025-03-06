@@ -1,0 +1,67 @@
+{"properties": [
+  {
+    "name": "POSTGRES_SQL_USERNAME",
+    "type": "java.lang.String",
+    "description": "A description for 'POSTGRES_SQL_USERNAME'"
+  },
+  {
+    "name": "POSTGRES_SQL_PASSWORD",
+    "type": "java.lang.String",
+    "description": "A description for 'POSTGRES_SQL_PASSWORD'"
+  },
+  {
+    "name": "POSTGRES_SQL_HOST",
+    "type": "java.lang.String",
+    "description": "A description for 'POSTGRES_SQL_HOST'"
+  },
+  {
+    "name": "POSTGRES_SQL_PORT",
+    "type": "java.lang.String",
+    "description": "A description for 'POSTGRES_SQL_PORT'"
+  },
+  {
+    "name": "POSTGRES_SQL_DB",
+    "type": "java.lang.String",
+    "description": "A description for 'POSTGRES_SQL_DB'"
+  },
+  {
+    "name": "SERVER_PORT",
+    "type": "java.lang.String",
+    "description": "A description for 'SERVER_PORT'"
+  },
+  {
+    "name": "ACTIVE_PROFILE",
+    "type": "java.lang.String",
+    "description": "A description for 'ACTIVE_PROFILE'"
+  },
+  {
+    "name": "EMAIL_HOST",
+    "type": "java.lang.String",
+    "description": "A description for 'EMAIL_HOST'"
+  },
+  {
+    "name": "EMAIL_PORT",
+    "type": "java.lang.String",
+    "description": "A description for 'EMAIL_PORT'"
+  },
+  {
+    "name": "EMAIL_ID",
+    "type": "java.lang.String",
+    "description": "A description for 'EMAIL_ID'"
+  },
+  {
+    "name": "EMAIL_PASSWORD",
+    "type": "java.lang.String",
+    "description": "A description for 'EMAIL_PASSWORD'"
+  },
+  {
+    "name": "VERIFY_EMAIL_HOST",
+    "type": "java.lang.String",
+    "description": "A description for 'VERIFY_EMAIL_HOST'"
+  },
+  {
+    "name": "spring.mail.verify.host",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.mail.verify.host'"
+  }
+]}

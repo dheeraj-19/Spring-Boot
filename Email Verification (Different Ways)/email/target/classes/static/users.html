@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("registrationForm").addEventListener("submit", async function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get form data
+                let user = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value,
+                    emailType: document.getElementById("emailType").value
+                };
+
+                try {
+                    let response = await fetch("/users", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(user)
+                    });
+
+                    let result = await response.json();
+                    if (response.ok) {
+                        document.getElementById("successMessage").style.display = "block";
+
+                        // Optionally, clear the form
+                        document.getElementById("registrationForm").reset();
+
+                    } else {
+                        alert("Error: " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred while registering.");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get("token");
+
+            if (token) {
+                try {
+                    let response = await fetch(`/users?token=${token}`, { method: "GET" });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    // Ensure response is JSON before parsing
+                    let contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        throw new Error("Received non-JSON response, possible error page.");
+                    }
+
+                    let result = await response.json();
+
+                    let verificationContainer = document.getElementById("verificationContainer");
+                    let verificationStatus = document.getElementById("verificationStatus");
+                    let verificationJson = document.getElementById("verificationJson");
+
+                    verificationStatus.innerText = result.message;
+                    verificationJson.innerText = JSON.stringify(result, null, 2);
+
+                    verificationContainer.style.display = "block";
+                    verificationContainer.classList.add("alert-success");
+
+                } catch (error) {
+                    console.error("Error verifying account:", error);
+                    let verificationContainer = document.getElementById("verificationContainer");
+                    verificationContainer.innerHTML = `<strong>An error occurred while verifying.</strong><br>${error}`;
+                    verificationContainer.classList.add("alert-danger");
+                    verificationContainer.style.display = "block";
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Emails</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Demo and Verification</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+    <!-- Create HTML registration form -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <div id="successMessage" class="alert alert-info text-center" style="display: none;">
+                    You've successfully registered!
+                </div>
+
+                <h1 class="text-center">Registration</h1>
+
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label class="control-label" for="name"> Name </label>
+                        <input id="name" class="form-control" required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="email"> Email </label>
+                        <input id="email" class="form-control" required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="password"> Password </label>
+                        <input id="password" class="form-control" type="password" required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="emailType"> Email Type </label>
+                        <select id="emailType" class="form-control" required>
+                            <option value="">Select Email Type</option>
+                            <option value="simple">Simple</option>
+                            <option value="withAttachments">With Attachments</option>
+                            <option value="withEmbeddedImages">With Embedded Images</option>
+                            <option value="html">HTML</option>
+                            <option value="htmlWithImages">HTML With Embedded Images</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </form>
+
+                <div id="verificationContainer" class="alert" style="display: none;">
+                    <h3 class="text-center">Account Verification Status</h3>
+                    <p id="verificationStatus" class="text-center"></p>
+                    <pre id="verificationJson"></pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
