@@ -72,8 +72,8 @@ registration-login
 │ │ │ ├── templates               # Frontend (HTML) 
 │ │ │ │ ├── HTMLs
 │ │ │ ├── application.properties  # Database & App Config 
-│── pom.xml # Maven Dependencies 
-│── README.md # Project Documentation
+│── pom.xml                       # Maven Dependencies 
+│── README.md                     # Project Documentation
 </pre>
 
 ---
