@@ -1,0 +1,28 @@
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 px 57px;
+    height: auto;
+
+    a.active {
+        background: white;
+        color: black;
+    }
+
+    a {
+        font-weight: 300;
+        font-size: 15px;
+        border-radius: 0px;
+        color: white;
+    }
+
+    a.ant-btn {
+        &:hover {
+            color: black;
+            background: white;
+            font-weight: 300;
+            font-size: 15px;
+        }
+    }
+}

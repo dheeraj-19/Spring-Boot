@@ -1,0 +1,26 @@
+<div class="bg">
+    <div class="parent">
+        <div class="child">
+            <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                <nz-form-label [nzNoColon]="'true'">Title</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="This is a required field!">
+                        <input type="text" nz-input placeholder="Title" formControlName="title" />
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-label [nzNoColon]="'true'">Description</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="This is a required field!">
+                        <textarea rows="4" nz-input placeholder="Description" formControlName="description"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <div style="padding-bottom: 30px;">
+                    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

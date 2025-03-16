@@ -1,0 +1,13 @@
+<div class="main">
+    <div nz-row>
+        <div nz-col nzSpan="24" style="margin-bottom: 20px;">
+            <span style="margin: 20px" *ngFor="let form of forms">
+                <nz-card [nzBordered]="true" class="form" nzTitle="{{form.title}}">
+                    <p><strong>Description</strong> {{form.description}}</p>
+
+                    <button nz-button nzType="primary" routerLink="/user/submit-form/{{form.id}}">Start Form</button>
+                </nz-card>
+            </span>
+        </div>
+    </div>
+</div>

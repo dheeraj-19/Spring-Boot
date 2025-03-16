@@ -1,0 +1,41 @@
+<div style="margin: auto; width: 80%;">
+    <form [formGroup]="responseForm">
+        <div class="question" *ngFor="let question of questions">
+            <h3>{{ question.questionText }}</h3>
+
+            <!-- TEXT TYPE QUESTION -->
+            <div *ngIf="question.questionType === 'TEXT'">
+                <input type="text" nz-input [formControlName]="'response_' + question.id"
+                    placeholder="Enter your answer" />
+            </div>
+
+            <!-- DROPDOWN TYPE QUESTION -->
+            <div *ngIf="question.questionType === 'DROPDOWN'">
+                <select nz-select [formControlName]="'response_' + question.id">
+                    <option *ngFor="let option of question.options" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+
+            <!-- RADIO BUTTON TYPE QUESTION -->
+            <div *ngIf="question.questionType === 'RADIO'">
+                <label *ngFor="let option of question.options">
+                    <input type="radio" [value]="option" [formControlName]="'response_' + question.id" />
+                    {{ option }}
+                </label>
+            </div>
+
+            <!-- CHECKBOX TYPE QUESTION (MULTIPLE CHOICE) -->
+            <div *ngIf="question.questionType === 'CHECKBOX'">
+                <label *ngFor="let option of question.options">
+                    <input type="checkbox" [value]="option"
+                        (change)="onCheckboxChange($event, 'response_' + question.id)" />
+                    {{ option }}
+                </label>
+            </div>
+
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button nz-button class="submit-btn" [nzType]="'primary'" (click)="submitResponses()">Submit</button>
+    </form>
+</div>

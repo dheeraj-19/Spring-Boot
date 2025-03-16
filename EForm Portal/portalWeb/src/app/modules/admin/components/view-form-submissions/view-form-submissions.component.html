@@ -1,0 +1,31 @@
+<div class="main">
+    <div nz-row>
+        <div nz-col nzSpan="24">
+            <div *ngFor="let user of users" class="user-container">
+                <nz-card [nzBordered]="true" class="user-card" [nzTitle]="'User: ' + user.userName">
+                    <nz-collapse>
+                        <nz-collapse-panel *ngFor="let form of user.forms" [nzHeader]="'Form: ' + form.formTitle">
+                            <nz-card [nzBordered]="true" class="form-card">
+                                <nz-table #basicTable [nzBordered]="true" [nzData]="form.submissions"
+                                    [nzSize]="'middle'" [nzShowPagination]="false">
+                                    <thead>
+                                        <tr>
+                                            <th nzWidth="50%">Question</th>
+                                            <th nzWidth="50%">Answer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let submission of form.submissions">
+                                            <td>{{ submission.questionText }}</td>
+                                            <td>{{ submission.answer || 'No Answer' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </nz-table>
+                            </nz-card>
+                        </nz-collapse-panel>
+                    </nz-collapse>
+                </nz-card>
+            </div>
+        </div>
+    </div>
+</div>

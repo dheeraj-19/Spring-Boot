@@ -1,0 +1,35 @@
+<div class="parent">
+    <div class="child">
+        <form nz-form [formGroup]="questionForm" class="login-form" (ngSubmit)="submitForm()">
+            <nz-form-label [nzNoColon]="'true'">Question Title</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="This is a required field!">
+                    <input type="text" nz-input formControlName="questionText" placeholder="Question Text" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-label [nzNoColon]="'true'">Question Type</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="This is a required field!">
+                    <nz-select formControlName="questionType" (ngModelChange)="onQuestionTypeChange()">
+                        <nz-option *ngFor="let type of questionTypes" [nzValue]="type" [nzLabel]="type"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <div
+                *ngIf="questionForm.get('questionType')?.value !== 'TEXT'">
+                <nz-form-label [nzNoColon]="'true'">Options</nz-form-label>
+                <div formArrayName="options">
+                    <nz-form-item *ngFor="let option of options.controls; let i = index">
+                        <input type="text" nz-input placeholder="Option {{ i + 1 }}" [formControlName]="i" />
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <div style="padding-bottom: 30px;">
+                <button nz-button class="login-form-button" [nzType]="'primary'">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
